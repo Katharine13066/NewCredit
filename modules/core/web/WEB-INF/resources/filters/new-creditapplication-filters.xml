@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<filters xmlns="http://schemas.haulmont.com/thesis/5.1/filters.xsd">
+
+    <!-- Фильтр "Moй банк" -->
+    <filterDescriptor>
+        <filterEntities>
+            <filterEntity screen="credit$CreditApplication.lookup"
+                          code="SysFilter.ByBank"
+                          entityName="credit$CreditApplication"/>
+        </filterEntities>
+        <conditions>
+            <filter>
+                <and>
+                    <c name="Bank" class="com.haulmont.thesis.core.entity.Bank"
+                       caption="msg://com.haulmont.thesis.core.entity/Bank" type="CUSTOM" entityAlias="d">
+                        d.credit.bank.id = :component$genericFilter.bankId
+                        <param name="component$genericFilter.bankId"
+                               javaClass="com.haulmont.thesis.core.entity.Bank">
+                            NULL
+                        </param>
+                    </c>
+                </and>
+            </filter>
+        </conditions>
+    </filterDescriptor>
+
+</filters>
