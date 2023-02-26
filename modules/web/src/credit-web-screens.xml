@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <include file="/credit-screens.xml"/>
+    <screen id="credit$CreditType.browse" template="com/company/credit/web/ui/credittype/credit-type-browse.xml"/>
+    <screen id="credit$CreditType.edit" template="com/company/credit/web/ui/credittype/credit-type-edit.xml"/>
+    <screen id="credit$CreditType.lookup" template="com/company/credit/web/ui/credittype/credit-type-browse.xml"/>
+</screen-config>

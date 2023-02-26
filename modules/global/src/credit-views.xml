@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="credit$CreditType" name="browse" extends="_local"/>
+    <view entity="credit$CreditType" name="edit" extends="_local"/>
+</views>

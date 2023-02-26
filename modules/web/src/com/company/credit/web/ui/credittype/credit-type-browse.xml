@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:thesis="http://schemas.haulmont.com/thesis/thesis-window.xsd"
+        class="com.company.credit.web.ui.credittype.CreditTypeBrowse"
+        messagesPack="com.company.credit.web.ui.credittype"
+        caption="msg://browseCaption"
+        lookupComponent="creditTypesTable"
+        focusComponent="genericFilter">
+    <dsContext>
+        <collectionDatasource id="creditTypesDs"
+                              class="com.company.credit.entity.CreditType"
+                              view="browse">
+            <query>
+                <![CDATA[select e from credit$CreditType e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout>
+        <vbox id="filterBox" expand="table-panel" spacing="true" height="100%">
+            <filter id="genericFilter"
+                    datasource="creditTypesDs" stylename="edit-area" applyTo="creditTypesTable">
+                <properties include=".*"/>
+            </filter>
+            <vbox id="table-panel" expand="creditTypesTable" spacing="true">
+                <table id="creditTypesTable"
+                       width="100%"
+                       presentations="true"
+                       multiselect="true">
+                    <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+                        <button id="createBtn"
+                                action="creditTypesTable.create"/>
+                        <thesis:separator/>
+                        <button id="editBtn"
+                                action="creditTypesTable.edit"/>
+                        <button id="removeBtn"
+                                action="creditTypesTable.remove"/>
+                    </buttonsPanel>
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <rowsCount/>
+                    <columns>
+                        <column id="code"/>
+                        <column id="name"/>
+                        <column id="comment"/>
+                    </columns>
+                    <rows datasource="creditTypesDs"/>
+                </table>
+            </vbox>
+        </vbox>
+    </layout>
+</window>

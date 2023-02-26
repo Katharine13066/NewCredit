@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<fts-config>
+    <entities>
+
+        <entity class="com.company.credit.entity.CreditType">
+            <include re=".*"/>
+        </entity>
+    </entities>
+</fts-config>
