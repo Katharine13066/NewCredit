@@ -8,25 +8,22 @@ package com.company.credit.entity;
 
 import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.MetaClass;
+import com.haulmont.cuba.core.entity.annotation.EnableRestore;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.Messages;
-
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.thesis.core.entity.Doc;
-
+import com.haulmont.thesis.core.entity.HasDetailedDescription;
 import com.haulmont.thesis.core.entity.Individual;
 import com.haulmont.thesis.core.global.EntityCopyUtils;
 import org.apache.commons.lang.StringUtils;
-import com.haulmont.thesis.core.entity.HasDetailedDescription;
-import com.haulmont.cuba.core.entity.annotation.EnableRestore;
-import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
-import javax.persistence.*;
-
-import com.haulmont.cuba.core.entity.annotation.Listeners;
 
 @DiscriminatorValue("2100")
 @Table(name = "CREDIT_CREDIT_APPLICATION")
@@ -38,9 +35,11 @@ import com.haulmont.cuba.core.entity.annotation.Listeners;
 public class CreditApplication extends Doc implements HasDetailedDescription {
 
     private static final long serialVersionUID = -9145638764371438134L;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CREDIT_ID")
     protected Credit credit;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INDIVIDUAL_ID")
     protected Individual individual;

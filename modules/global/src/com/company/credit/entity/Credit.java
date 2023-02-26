@@ -8,8 +8,8 @@ package com.company.credit.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.EnableRestore;
-import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.thesis.core.entity.Bank;
 import com.haulmont.thesis.core.entity.TsCard;
 
@@ -26,17 +26,22 @@ import java.util.Date;
 @NamePattern("%s|description")
 public class Credit extends TsCard {
     private static final long serialVersionUID = 2519583942380012812L;
+
     @Column(name = "NUMBER_", length = 50)
     protected String number;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CREDIT_TYPE_ID")
     protected CreditType creditType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BANK_ID")
     protected Bank bank;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "DATE_")
     protected Date date;
+
     @Column(name = "AMOUNT")
     protected Double amount;
 
