@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:thesis="http://schemas.haulmont.com/thesis/thesis-window.xsd"
+        class="com.company.credit.web.ui.credit.CreditEdit"
+        messagesPack="com.company.credit.web.ui.credit"
+        caption="msg://editCaption"
+        datasource="cardDs">
+    <dsContext>
+        <datasource id="cardDs"
+                    class="com.company.credit.entity.Credit"
+                    view="edit">
+            <collectionDatasource id="cardProcDs" property="procs"/>
+            <collectionDatasource id="cardRolesDs" property="roles"/>
+        </datasource>
+        <hierarchicalDatasource id="attachmentsDs" class="com.haulmont.workflow.core.entity.CardAttachment"
+                                datasourceClass="com.haulmont.thesis.web.ui.common.attachments.ThesisAttachmentsDataSource"
+                                view="card-edit" hierarchyProperty="versionOf">
+            <query>
+                <![CDATA[select a from wf$CardAttachment a where a.card.id = :ds$cardDs order by a.createTs desc]]></query>
+        </hierarchicalDatasource>
+        <collectionDatasource id="cardRelationsDs" class="com.haulmont.workflow.core.entity.CardRelation"
+                              view="card-relation">
+            <query>
+                <![CDATA[select c from wf$CardRelation c where (c.card.id = :ds$cardDs or c.relatedCard.id = :ds$cardDs)]]></query>
+        </collectionDatasource>
+        <collectionDatasource id="creditTypesDs" class="com.company.credit.entity.CreditType" view="_minimal">
+            <query><![CDATA[ select e from credit$CreditType e]]></query>
+        </collectionDatasource>
+        <collectionDatasource id="banksDs" class="com.haulmont.thesis.core.entity.Bank" view="_minimal">
+            <query><![CDATA[ select e from df$Bank e]]></query>
+        </collectionDatasource>
+    </dsContext>
+    <assign name="width" value="theme://thesis.gui.editor-fields.width"/>
+    <assign name="small_width" value="180px"/>
+    <assign name="textAreaHeight" value="176px"/>
+    <assign name="rightPanelWidth" value="theme://thesis.edit-actions-pane.button-width"/>
+    <assign name="rightPanelBoxWidth" value="theme://thesis.edit-actions-pane.width"/>
+    <layout expand="mainPane">
+        <hbox id="mainPane" stylename="no-window-padding-right" expand="tabsheet" width="100%">
+            <tabSheet id="tabsheet" height="100%">
+                <tab id="mainTab" caption="msg://mainTab">
+                    <groupBox id="cardInfoGroupBox" stylename="edit-area" height="100%" width="100%">
+                        <scrollBox id="infoScrollBox" scrollBars="both" height="100%" contentWidth="100%">
+                            <vbox id="cardHeaderHolder" width="100%"/>
+                            <vbox id="infoVBox" width="AUTO">
+                                <hbox id="mainGridBox" stylename="thesis-main-grid-box">
+                                    <grid id="leftGrid" spacing="true" margin="true, true, false, false">
+                                        <columns>
+                                            <column flex="1"/>
+                                        </columns>
+                                        <rows>
+                                            <row id="numberRow">
+                                                <textField id="number" property="number" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.credit.entity/Credit.number"/>
+                                            </row>
+                                            <row id="dateRow">
+                                                <dateField id="date" property="date" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.credit.entity/Credit.date"/>
+                                            </row>
+                                            <row id="amountRow">
+                                                <textField id="amount" property="amount" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.credit.entity/Credit.amount"/>
+                                            </row>
+                                            <row id="creditTypeRow">
+                                                <lookupField id="creditType" property="creditType" datasource="cardDs"
+                                                             width="theme://thesis.gui.editor-fields.width"
+                                                             caption="msg://com.company.credit.entity/Credit.creditType"
+                                                             optionsDatasource="creditTypesDs"/>
+                                            </row>
+                                            <row id="bankRow">
+                                                <lookupField id="bank" property="bank" datasource="cardDs"
+                                                             width="theme://thesis.gui.editor-fields.width"
+                                                             caption="msg://com.company.credit.entity/Credit.bank"
+                                                             optionsDatasource="banksDs"/>
+                                            </row>
+                                            <row id="signatureAndAttachmentRow">
+                                                <vbox id="signatureAndAttachmentMainBox">
+                                                    <vbox id="attachmentMainBox"
+                                                          margin="true, false, false, false">
+                                                        <label id="attachmentLabel"
+                                                               value="msg://attachments"
+                                                               stylename="label-like-caption"/>
+                                                        <grid id="attachmentInfo"
+                                                              spacing="true"
+                                                              width="${width}">
+                                                            <columns>
+                                                                <column flex="1"/>
+                                                            </columns>
+                                                            <rows>
+                                                                <row id="attachmentRow">
+                                                                    <vbox id="attachmentBox" height="100%">
+                                                                    </vbox>
+                                                                </row>
+                                                            </rows>
+                                                        </grid>
+                                                    </vbox>
+                                                </vbox>
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                </hbox>
+                            </vbox>
+                        </scrollBox>
+                    </groupBox>
+                </tab>
+                <tab id="attachmentsTab" caption="msg://attachments">
+                    <groupBox id="attachmentsTabGroupBox" stylename="edit-area"
+                              height="100%" width="100%" expand="atdrop">
+                        <hbox id="atdrop" width="100%" height="100%" margin="false,true,false,false">
+                            <frame screen="cardAttachmentsFrame" id="cardAttachmentsFrame" height="100%"/>
+                        </hbox>
+                    </groupBox>
+                </tab>
+                <tab id="cardTreeTab" caption="msg://cardTreeTab">
+                    <groupBox id="cardTreeTabGroupBox" stylename="edit-area"
+                              height="100%" width="100%" expand="cardTreeFrameBox">
+                        <vbox id="cardHeaderHolder" width="100%"/>
+                        <vbox id="cardTreeFrameBox" width="100%" margin="false,true,false,false">
+                            <frame id="cardTreeFrame" screen="cardTreeFrame" height="100%"/>
+                        </vbox>
+                    </groupBox>
+                </tab>
+                <tab id="resolutionsTab" caption="msg://resolutionsTab">
+                    <groupBox id="resolutionsTabGroupBox" stylename="edit-area"
+                              height="100%" width="100%" expand="resolutionsPane">
+                        <vbox id="cardHeaderHolder" width="100%"/>
+                        <vbox id="resolutionsPane" expand="resolutionsFrame" margin="false,true,false,false"
+                              width="100%" spacing="true">
+                            <frame id="resolutionsFrame" screen="resolutionsFrame"/>
+                        </vbox>
+                    </groupBox>
+                </tab>
+                <tab id="processTab" caption="msg://processTab">
+                    <groupBox id="processTabGroupBox" stylename="edit-area"
+                              height="100%" width="100%" expand="cardProcFrameBox">
+                        <vbox id="cardHeaderHolder" width="100%"/>
+                        <vbox id="cardProcFrameBox" margin="false,true,false,false">
+                            <frame id="cardProcFrame" screen="cardProcFrame" height="100%"/>
+                        </vbox>
+                    </groupBox>
+                </tab>
+                <tab id="cardLogTab" caption="msg://cardLogTab" lazy="true">
+                    <groupBox id="cardLogTabGroupBox" stylename="edit-area"
+                              height="100%" width="100%" expand="cardLogFrameBox">
+                        <vbox id="cardHeaderHolder" width="100%"/>
+                        <vbox id="cardLogFrameBox" margin="false,true,false,false">
+                            <frame id="cardLogFrame" screen="cardLogFrame" height="100%"/>
+                        </vbox>
+                    </groupBox>
+                </tab>
+                <tab id="securityTab" caption="msg://securityTab" lazy="true">
+                    <groupBox id="securityTabGroupBox" stylename="edit-area"
+                              height="100%" width="100%" expand="securityFrameBox">
+                        <vbox id="cardHeaderHolder" width="100%"/>
+                        <vbox id="securityFrameBox" margin="false,true,false,false">
+                            <frame id="securityFrame" screen="securityFrame" height="100%"/>
+                        </vbox>
+                    </groupBox>
+                </tab>
+            </tabSheet>
+            <scrollBox id="buttonsPane" stylename="t-right-buttons-panel" width="${rightPanelBoxWidth}" spacing="true"
+                       height="100%">
+                <vbox id="actionsPane" stylename="edit-area t-right-buttons-panel-container" width="${rightPanelWidth}">
+                    <frame id="actionsFrame" screen="actionsFrame"/>
+                </vbox>
+                <frame id="startProcessButtonsFrame" screen="startProcessButtonsFrame" width="${rightPanelWidth}"
+                       stylename="t-right-buttons-panel-container"/>
+                <vbox id="otherActions" width="${rightPanelWidth}" spacing="true"
+                      stylename="edit-area t-right-buttons-panel-container">
+                    <button id="createFromPatternButton" caption="msg://createFromPattern" width="100%"/>
+                    <popupButton id="createSubCardButton" width="100%"
+                                 icon="ts-font-icon:PLUS" caption="msg://actions.Create"/>
+                    <runReportPopupButton id="print"
+                                          icon="ts-font-icon:PRINT" caption="msg://print"
+                                          width="100%"/>
+                    <button id="copyLinkButton" caption="msg://copyLink" width="100%"
+                            icon="ts-font-icon:LINK"/>
+                </vbox>
+            </scrollBox>
+        </hbox>
+    </layout>
+</window>

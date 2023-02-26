@@ -10,4 +10,15 @@
     <screen id="credit$CreditType.browse" template="com/company/credit/web/ui/credittype/credit-type-browse.xml"/>
     <screen id="credit$CreditType.edit" template="com/company/credit/web/ui/credittype/credit-type-edit.xml"/>
     <screen id="credit$CreditType.lookup" template="com/company/credit/web/ui/credittype/credit-type-browse.xml"/>
+    <screen id="credit$Credit.browse" template="com/company/credit/web/ui/credit/credit-browse.xml"/>
+    <screen id="credit$Credit.edit" template="com/company/credit/web/ui/credit/credit-edit.xml"/>
+    <screen id="credit$Credit.lookup" template="com/company/credit/web/ui/credit/credit-browse.xml"/>
+    <screen id="credit$CreditApplication.browse"
+            template="com/company/credit/web/ui/creditapplication/credit-application-browse.xml"/>
+    <screen id="credit$CreditApplication.edit"
+            template="com/company/credit/web/ui/creditapplication/credit-application-edit.xml"/>
+    <screen id="credit$CreditApplication.lookup"
+            template="com/company/credit/web/ui/creditapplication/credit-application-browse.xml"/>
+    <screen id="credit$CreditApplication.templateBrowse"
+            template="com/company/credit/web/ui/creditapplication/credit-application-template-browse.xml"/>
 </screen-config>

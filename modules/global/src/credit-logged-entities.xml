@@ -8,4 +8,6 @@
 <entities xmlns="http://schemas.haulmont.com/thesis/4.0/loggedEntities.xsd">
 
     <entity metaClass="credit$CreditType"/>
+    <entity metaClass="credit$Credit"/>
+    <entity metaClass="credit$CreditApplication"/>
 </entities>

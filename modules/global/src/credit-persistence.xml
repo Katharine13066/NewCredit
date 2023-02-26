@@ -12,5 +12,7 @@
                       transaction-type="RESOURCE_LOCAL">
 
         <class>com.company.credit.entity.CreditType</class>
+        <class>com.company.credit.entity.Credit</class>
+        <class>com.company.credit.entity.CreditApplication</class>
     </persistence-unit>
 </persistence>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:thesis="http://schemas.haulmont.com/thesis/thesis-window.xsd"
+        class="com.company.credit.web.ui.credit.CreditBrowse"
+        messagesPack="com.company.credit.web.ui.credit"
+        caption="msg://browseCaption"
+        lookupComponent="cardsTable"
+        focusComponent="genericFilter">
+    <dsContext>
+        <groupDatasource id="cardsDs"
+                         class="com.company.credit.entity.Credit"
+                         datasourceClass="com.company.credit.web.ui.credit.CreditBrowseDatasource"
+                         view="browse">
+            <query>
+                <![CDATA[select distinct e from credit$Credit e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <layout>
+        <vbox expand="split" spacing="true" height="100%">
+            <hbox id="filterBox" spacing="true" height="AUTO" width="100%">
+                <filter id="genericFilter" datasource="cardsDs" applyTo="cardsTable"
+                        manualApplyRequired="#property{cuba.gui.genericFilterManualApplyRequired}">
+                    <properties include=".*"
+                                exclude="parentCardAccess|important|procFamily|id|jbpmProcessId|category|signatures|version|
+                                         currentActorsString|currentActorsFullString|state|
+                                         deletedBy|deleteTs|updatedBy|updateTs|createTs|createdBy"/>
+                </filter>
+            </hbox>
+            <split id="split" orientation="vertical" pos="60" width="100%">
+                <vbox id="table-panel" expand="cardsTable" spacing="true" height="100%">
+                    <groupTable id="cardsTable"
+                                width="100%"
+                                presentations="true"
+                                multiselect="true"
+                                editable="false">
+                        <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+                            <button id="createBtn" icon="" action="cardsTable.create"/>
+                            <thesis:separator/>
+                            <button id="editBtn" action="cardsTable.edit"/>
+                            <button id="removeBtn" action="cardsTable.remove"/>
+                            <button id="saveAsTemplateButton" icon="" visible="false"/>
+                            <thesis:separator/>
+                            <button id="refreshBtn" action="cardsTable.refresh"/>
+                            <button id="excel" action="cardsTable.excel"/>
+                            <button id="expandBtn" action="cardsTable.expand"/>
+                            <runReportPopupButton id="printButton" icon="ts-font-icon:PRINT" description="msg://print"/>
+                        </buttonsPanel>
+                        <actions>
+                            <action id="create"/>
+                            <action id="edit"/>
+                            <action id="remove"/>
+                            <action id="saveAsTemplate" visible="false"/>
+                            <action id="refresh"/>
+                            <action id="excel"/>
+                            <action id="expand"/>
+                        </actions>
+                        <rowsCount/>
+                        <tableSettings id="tableSettings"/>
+                        <columns>
+                            <column id="hasAttachments" caption="msg://hasAttachments"
+                                    width="theme://thesis.browser.icon-header-width">
+                                <formatter
+                                        class="com.haulmont.thesis.gui.components.formatter.HasAttachmentsFormatter"/>
+                            </column>
+                            <column id="important" caption="msg://important"
+                                    width="theme://thesis.browser.icon-header-width">
+                                <formatter class="com.haulmont.thesis.gui.components.formatter.ImportantDocFormatter"/>
+                            </column>
+                            <column id="locState" caption="msg://state"/>
+                            <column id="number"/>
+                            <column id="date"/>
+                            <column id="amount"/>
+                            <column id="creditType"/>
+                            <column id="bank"/>
+                        </columns>
+                        <rows datasource="cardsDs"/>
+                    </groupTable>
+                </vbox>
+                <vbox id="cardDetailsTabSheetBox" width="100%" height="100%">
+                    <tabSheet id="cardDetailsTabSheet" height="100%" width="100%">
+                        <tab id="resolutionsTab" caption="msg://resolutions">
+                            <frame id="resolutionsFrame" screen="resolutionsFrame" height="100%"/>
+                        </tab>
+                        <tab id="hierarchyTab" caption="msg://hierarchy">
+                            <frame id="cardTreeFrame" screen="cardTreeFrame" height="100%"/>
+                        </tab>
+                    </tabSheet>
+                </vbox>
+            </split>
+        </vbox>
+    </layout>
+</window>
