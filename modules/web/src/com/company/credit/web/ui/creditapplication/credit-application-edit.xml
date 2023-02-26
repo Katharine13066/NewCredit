@@ -193,10 +193,16 @@
                                                 </lookupPickerField>
                                             </row>
                                             <row id="creditRow">
+                                                <vbox spacing="true">
                                                 <lookupField id="credit" property="credit" datasource="cardDs"
                                                              width="theme://thesis.gui.editor-fields.width"
                                                              caption="msg://com.company.credit.entity/CreditApplication.credit"
                                                              optionsDatasource="creditsDs"/>
+                                                <textField id="bankName" caption="msg://credit.bank"
+                                                           datasource="cardDs"
+                                                           property="credit.bank" width="180px"
+                                                           editable="false"/>
+                                                </vbox>
                                             </row>
                                             <row id="individualRow">
                                                 <lookupField id="individual" property="individual" datasource="cardDs"

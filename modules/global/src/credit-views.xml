@@ -60,7 +60,9 @@
         <property name="packageDoc" view="with-proc-base-info"/>
     </view>
     <view entity="credit$CreditApplication" name="edit" extends="_local">
-        <property name="credit" view="_minimal"/>
+        <property name="credit" view="_minimal">
+            <property name="bank" view="_minimal"/>
+        </property>
         <property name="individual" view="_minimal"/>
         <property name="category" view="_minimal"/>
         <property name="procs" view="card-edit"/>
