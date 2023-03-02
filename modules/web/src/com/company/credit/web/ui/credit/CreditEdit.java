@@ -7,18 +7,20 @@
 package com.company.credit.web.ui.credit;
 
 
-import com.company.credit.entity.*;
+import com.company.credit.entity.Credit;
+import com.haulmont.cuba.core.entity.Entity;
+import com.haulmont.cuba.core.global.LoadContext;
+import com.haulmont.cuba.core.global.PersistenceHelper;
 import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.components.Component;
+import com.haulmont.cuba.gui.components.DialogAction;
+import com.haulmont.thesis.core.app.NumerationService;
+import com.haulmont.thesis.core.entity.Numerator;
 import com.haulmont.thesis.web.ui.basic.editor.AbstractCardEditor;
 import com.haulmont.thesis.web.ui.basic.editor.CardHeaderFragment;
 import com.haulmont.workflow.core.app.WfUtils;
-import com.haulmont.cuba.gui.components.Button;
 import org.apache.commons.lang.StringUtils;
-import com.haulmont.cuba.core.global.LoadContext;
-import com.haulmont.thesis.core.entity.Numerator;
-import com.haulmont.thesis.core.app.NumerationService;
-import com.haulmont.cuba.core.entity.Entity;
-import com.haulmont.cuba.core.global.PersistenceHelper;
 
 import javax.inject.Inject;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CreditEdit<T extends Credit> extends AbstractCardEditor<T> {
+
+    protected boolean closeFlag = false;
 
     @Inject
     protected NumerationService numerationService;
@@ -106,5 +110,34 @@ public class CreditEdit<T extends Credit> extends AbstractCardEditor<T> {
             boolean editable = getAccessData().isCardRolesEditable();
             cardRolesFrame.setEditable(editable);
         }
+    }
+    @Override
+    public boolean validateAll(){
+        boolean b = super.validateAll();
+        if(b){
+            if(!closeFlag){
+                if(getItem().getAmount() == null){
+                    showOptionDialog(getMessage("Внимание!"),
+                            getMessage("В документе не заполнено поле сумма кредита. Желаете сохранить документ?"),
+                            MessageType.CONFIRMATION,
+                            new Action[]{
+                                    new DialogAction(DialogAction.Type.YES, true){
+                                        @Override
+                                        public void actionPerform(Component component){
+                                            closeFlag = true;
+                                            close(COMMIT_ACTION_ID);
+                                        }
+                                    },
+                                    new DialogAction(DialogAction.Type.NO){
+                                        @Override
+                                        public void actionPerform(Component component){
+                                        }
+                                    }
+                            });
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
