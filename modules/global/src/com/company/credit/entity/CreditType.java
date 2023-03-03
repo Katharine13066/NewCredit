@@ -6,6 +6,7 @@
 
 package com.company.credit.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.EnableRestore;
 import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 @Entity(name = "credit$CreditType")
 @EnableRestore
 @TrackEditScreenHistory
+@NamePattern("%s|name")
 public class CreditType extends StandardEntity {
 
     private static final long serialVersionUID = -7199062103614494819L;
