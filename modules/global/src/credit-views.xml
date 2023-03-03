@@ -16,6 +16,7 @@
         <property name="substitutedCreator" view="_minimal"/>
         <property name="createdBy"/>
         <property name="createTs"/>
+        <property name="surety" view="_minimal"/>
     </view>
     <view entity="credit$Credit" name="edit" extends="_local">
         <property name="creditType" view="_minimal"/>
@@ -31,6 +32,7 @@
         <property name="createdBy"/>
         <property name="createTs"/>
         <property name="creator" view="user-minimal"/>
+        <property name="surety" view="_minimal"/>
     </view>
     <view entity="credit$Credit" name="subCard" extends="_minimal">
         <property name="procFamily">
@@ -42,7 +44,7 @@
     </view>
     <view entity="credit$CreditApplication" name="browse" extends="_local">
         <property name="credit" view="_minimal"/>
-        <property name="individual" view="_minimal"/>
+        <property name="guarantor" view="_minimal"/>
         <property name="proc" view="proc-minimal"/>
         <property name="substitutedCreator" view="user-minimal"/>
         <property name="docKind" view="_minimal"/>
@@ -63,7 +65,7 @@
         <property name="credit" view="_minimal">
             <property name="bank" view="_minimal"/>
         </property>
-        <property name="individual" view="_minimal"/>
+        <property name="guarantor" view="_minimal"/>
         <property name="category" view="_minimal"/>
         <property name="procs" view="card-edit"/>
         <property name="roles" view="card-edit"/>

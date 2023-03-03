@@ -35,6 +35,9 @@
         <collectionDatasource id="banksDs" class="com.haulmont.thesis.core.entity.Bank" view="_minimal">
             <query><![CDATA[ select e from df$Bank e]]></query>
         </collectionDatasource>
+        <collectionDatasource id="suretyDs" class="com.haulmont.thesis.core.entity.Contractor" view="_minimal">
+            <query><![CDATA[ select e from df$Contractor e]]></query>
+        </collectionDatasource>
     </dsContext>
     <assign name="width" value="theme://thesis.gui.editor-fields.width"/>
     <assign name="small_width" value="180px"/>
@@ -81,6 +84,12 @@
                                                              width="theme://thesis.gui.editor-fields.width"
                                                              caption="msg://com.company.credit.entity/Credit.bank"
                                                              optionsDatasource="banksDs"/>
+                                            </row>
+                                            <row id="suretyRow">
+                                                <lookupField id="surety" property="surety" datasource="cardDs"
+                                                             width="theme://thesis.gui.editor-fields.width"
+                                                             caption="msg://com.company.credit.entity/Credit.surety"
+                                                             optionsDatasource="suretyDs"/>
                                             </row>
                                             <row id="signatureAndAttachmentRow">
                                                 <vbox id="signatureAndAttachmentMainBox">

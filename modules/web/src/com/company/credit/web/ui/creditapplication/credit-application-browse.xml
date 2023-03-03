@@ -137,7 +137,7 @@
                             <column id="number" caption="msg://number"/>
                             <column id="regNo" caption="msg://regNo"/>
                             <column id="date" caption="msg://date"/>
-                            <column id="contractor" collapsed="true" caption="msg://contractor"/>
+                            <column id="guarantor" collapsed="true" caption="msg://contractor"/>
                             <column id="proc.locName" collapsed="true" caption="msg://procName"/>
                             <column id="locState" caption="msg://state"/>
                             <column id="theme" caption="msg://theme" maxTextLength="30"/>
@@ -147,7 +147,6 @@
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
                             <column id="credit"/>
-                            <column id="individual"/>
                             <column id="regDate" collapsed="true" caption="msg://regDate">
                                 <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
                                            format="msg://dateFormat"/>

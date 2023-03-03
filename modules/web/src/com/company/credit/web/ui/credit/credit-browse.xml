@@ -79,6 +79,7 @@
                             <column id="amount"/>
                             <column id="creditType"/>
                             <column id="bank"/>
+                            <column id="surety"/>
                         </columns>
                         <rows datasource="cardsDs"/>
                     </groupTable>

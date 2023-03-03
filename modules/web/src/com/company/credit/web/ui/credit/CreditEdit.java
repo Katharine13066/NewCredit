@@ -15,7 +15,9 @@ import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.Component;
 import com.haulmont.cuba.gui.components.DialogAction;
+import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.thesis.core.app.NumerationService;
+import com.haulmont.thesis.core.app.UserSessionTools;
 import com.haulmont.thesis.core.entity.Numerator;
 import com.haulmont.thesis.web.ui.basic.editor.AbstractCardEditor;
 import com.haulmont.thesis.web.ui.basic.editor.CardHeaderFragment;
@@ -26,10 +28,16 @@ import javax.inject.Inject;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreditEdit<T extends Credit> extends AbstractCardEditor<T> {
 
     protected boolean closeFlag = false;
+
+    @Inject
+    private TextField<Double> amount;
+    @Inject
+    protected UserSessionTools userSessionTools;
 
     @Inject
     protected NumerationService numerationService;
@@ -39,6 +47,14 @@ public class CreditEdit<T extends Credit> extends AbstractCardEditor<T> {
     @Override
     protected String getHiddenTabsConfig() {
         return "processTab,securityTab,cardLogTab";
+    }
+
+    @Override
+    public void init(Map<String, Object> params) {
+        super.init(params);
+        if(!userSessionTools.isCurrentUserAdministrator()){
+            amount.setVisible(false);
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.haulmont.cuba.core.entity.annotation.EnableRestore;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
 import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.thesis.core.entity.Bank;
+import com.haulmont.thesis.core.entity.Contractor;
 import com.haulmont.thesis.core.entity.TsCard;
 
 import javax.persistence.*;
@@ -30,6 +31,10 @@ public class Credit extends TsCard {
     @Column(name = "NUMBER_", length = 50)
     protected String number;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SURETY_ID")
+    protected Contractor surety;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CREDIT_TYPE_ID")
     protected CreditType creditType;
@@ -44,6 +49,14 @@ public class Credit extends TsCard {
 
     @Column(name = "AMOUNT")
     protected Double amount;
+
+    public Contractor getSurety() {
+        return surety;
+    }
+
+    public void setSurety(Contractor surety) {
+        this.surety = surety;
+    }
 
     public Double getAmount() {
         return amount;

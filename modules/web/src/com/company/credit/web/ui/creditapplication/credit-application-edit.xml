@@ -181,17 +181,6 @@
                                                              width="${width}">
                                                 </pickerField>
                                             </row>
-                                            <row id="contractorRow">
-                                                <lookupPickerField id="contractor" datasource="cardDs"
-                                                                   caption="msg://contractor" property="contractor"
-                                                                   width="${width}"
-                                                                   optionsDatasource="contractorsDs">
-                                                    <actions>
-                                                        <action id="open"/>
-                                                        <action id="lookup"/>
-                                                    </actions>
-                                                </lookupPickerField>
-                                            </row>
                                             <row id="creditRow">
                                                 <vbox spacing="true">
                                                 <lookupField id="credit" property="credit" datasource="cardDs"
@@ -204,11 +193,18 @@
                                                            editable="false"/>
                                                 </vbox>
                                             </row>
-                                            <row id="individualRow">
-                                                <lookupField id="individual" property="individual" datasource="cardDs"
-                                                             width="theme://thesis.gui.editor-fields.width"
-                                                             caption="msg://com.company.credit.entity/CreditApplication.individual"
-                                                             optionsDatasource="individualsDs"/>
+                                            <row id="guarantorRow">
+                                                <lookupPickerField id="guarantor"
+                                                                   datasource="cardDs"
+                                                                   caption="msg://contractor"
+                                                                   property="guarantor"
+                                                                   width="theme://thesis.gui.editor-fields.width"
+                                                                   optionsDatasource="contractorsDs">
+                                                    <actions>
+                                                        <action id="open"/>
+                                                        <action id="lookup"/>
+                                                    </actions>
+                                                </lookupPickerField>
                                             </row>
                                             <row id="checkBoxesRow">
                                                 <vbox id="checkBoxesBox" stylename="thesis-checkbox-box" spacing="true">

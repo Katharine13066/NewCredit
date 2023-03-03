@@ -21,6 +21,7 @@ create table CREDIT_CREDIT (
     CARD_ID uuid,
     --
     NUMBER_ varchar(50),
+    SURETY_ID uuid,
     CREDIT_TYPE_ID uuid,
     BANK_ID uuid,
     DATE_ date,
@@ -34,7 +35,7 @@ create table CREDIT_CREDIT_APPLICATION (
     CARD_ID uuid,
     --
     CREDIT_ID uuid,
-    INDIVIDUAL_ID uuid,
+    GUARANTOR_ID uuid,
     --
     primary key (CARD_ID)
 )^

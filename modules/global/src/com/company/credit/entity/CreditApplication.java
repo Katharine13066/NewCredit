@@ -14,9 +14,9 @@ import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.thesis.core.entity.Contractor;
 import com.haulmont.thesis.core.entity.Doc;
 import com.haulmont.thesis.core.entity.HasDetailedDescription;
-import com.haulmont.thesis.core.entity.Individual;
 import com.haulmont.thesis.core.global.EntityCopyUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -41,15 +41,15 @@ public class CreditApplication extends Doc implements HasDetailedDescription {
     protected Credit credit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INDIVIDUAL_ID")
-    protected Individual individual;
+    @JoinColumn(name = "GUARANTOR_ID")
+    protected Contractor guarantor;
 
-    public Individual getIndividual() {
-        return individual;
+    public Contractor getGuarantor() {
+        return guarantor;
     }
 
-    public void setIndividual(Individual individual) {
-        this.individual = individual;
+    public void setGuarantor(Contractor guarantor) {
+        this.guarantor = guarantor;
     }
 
     public Credit getCredit() {

@@ -34,7 +34,8 @@
                                     <row id="codeRow">
                                         <textField id="code" property="code" datasource="creditTypeDs"
                                                    width="theme://thesis.gui.editor-fields.width"
-                                                   caption="msg://com.company.credit.entity/CreditType.code"/>
+                                                   caption="msg://com.company.credit.entity/CreditType.code"
+                                                   editable="false"/>
                                     </row>
                                     <row id="nameRow">
                                         <textField id="name" property="name" datasource="creditTypeDs"

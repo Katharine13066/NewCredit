@@ -28,7 +28,7 @@ BEGIN
   <field name="parentCard" inDocKind="true" required="false" visible="true" signed="false" />
   <field name="theme" inDocKind="true" required="false" visible="true" signed="false" />
   <field name="credit" inDocKind="true" required="TRUE" visible="true" signed="false" />
-  <field name="individual" inDocKind="true" required="TRUE" visible="true" signed="false" />
+  <field name="guarantor" inDocKind="true" required="TRUE" visible="true" signed="false" />
 </fields>
 '
 );
